@@ -1,4 +1,4 @@
-#MultiPayment DApp
+# MultiPayment DApp
 
 A Solidity-based multi-payment engine supporting both direct ETH payments and escrow-based payments.
 
