@@ -1,7 +1,6 @@
 # MultiPayment DApp
 
 A Solidity-based multi-payment engine supporting both direct ETH payments and escrow-based payments.
-
 This project is designed as a portfolio-grade Web3 payment system showing smart contract architecture, state-machine logic, access control, ETH fund handling, events, and automated Hardhat testing.
 
 ---
