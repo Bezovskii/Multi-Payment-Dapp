@@ -76,10 +76,10 @@ npx hardhat test
  npx hardhat run scripts/deploy.js --network localhost
 ```
 6. Update frontend contract address:
-   ```
+```
  frontend/src/contract/contractAddress.js
  export const contractAddress = "YOUR_DEPLOYED_CONTRACT_ADDRESS";
-   ```
+```  
 7. Start frontend:
 ```bash
    cd frontend
