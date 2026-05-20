@@ -102,20 +102,32 @@ Buyer creates escrow
 ↓
 
 Funds locked in contract
+
 ↓
+
 Seller delivers product/service
+
 ↓
+
 Buyer confirms receipt
+
 ↓
+
 Funds released to seller
 
 ## Example Refund Lifecycle
 Buyer creates escrow
+
 ↓
+
 Problem occurs
+
 ↓
+
 Seller refunds buyer
+
 ↓
+
 Funds returned from contract
 
 ## Current Limitations
