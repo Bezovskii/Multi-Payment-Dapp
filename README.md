@@ -23,7 +23,6 @@ Features
 - ethers.js
 - MetaMask
 Smart Contract Overview
-The MultiPayment contract supports two payment types.
 
 ## Direct Payment:
 Buyer → Contract → Seller
