@@ -98,7 +98,9 @@ npx hardhat test
 
 ## Example Escrow Lifecycle
 Buyer creates escrow
+
 ↓
+
 Funds locked in contract
 ↓
 Seller delivers product/service
