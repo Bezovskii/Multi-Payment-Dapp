@@ -138,7 +138,7 @@ Funds returned from contract
 - No event indexing yet
 - No multi-user authentication yet
 - Local/test environment only
-- 
+
 ## Roadmap
 V2 — Dispute System
 - Buyer/seller dispute flow
