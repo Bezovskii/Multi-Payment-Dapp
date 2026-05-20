@@ -73,19 +73,22 @@ npx hardhat test
 ```
 5. Deploy contract:
 ```bash
-   npx hardhat run scripts/deploy.js --network localhost
+ npx hardhat run scripts/deploy.js --network localhost
 ```
 6. Update frontend contract address:
+   ```
    frontend/src/contract/contractAddress.js
-
+   export const contractAddress = "YOUR_DEPLOYED_CONTRACT_ADDRESS";
+   ```
 7. Start frontend:
 ```bash
    cd frontend
    npm install
    npm run dev
 ```
+8. Open:
 ```
-Open: http://localhost:5173
+ http://localhost:5173
 ```
 ## Frontend Flow
 1. Connect MetaMask
