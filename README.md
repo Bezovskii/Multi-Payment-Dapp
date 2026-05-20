@@ -22,7 +22,6 @@ Features
 - Vite
 - ethers.js
 - MetaMask
-Smart Contract Overview
 
 ## Direct Payment:
 Buyer → Contract → Seller
