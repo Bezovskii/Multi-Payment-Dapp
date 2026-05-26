@@ -11,30 +11,30 @@ Dispute system
 Arbitrator resolution
 Frontend wallet integration
 Full automated smart contract testing
----
+
 ## Features:
 
 # Direct Payment
 Buyer sends ETH directly to seller instantly.
 Buyer → Seller
 Used for trusted fast transactions.
----
+
 
 # Escrow Payment
 Funds are locked inside the smart contract until buyer confirms receipt.
 Buyer → Smart Contract → Seller
 Used for safer peer-to-peer transactions.
----
+
 # Refund System
 Seller can refund escrowed ETH back to buyer.
----
+
 # Dispute System
 Buyer or seller can open a dispute.
 An arbitrator resolves the dispute and releases funds to:
 Seller
 OR
 Buyer
----
+
 
 # Tech Stack:
 # Smart Contract
