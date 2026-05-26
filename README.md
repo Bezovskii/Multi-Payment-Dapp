@@ -1,185 +1,299 @@
-## MultiPayment DApp ##
+## Multi-Payment-Dapp
 
-## Overview
-A Solidity + React decentralized payment system supporting direct ETH payments and escrow-based transactions. This project demonstrates a complete Web3 payment lifecycle including wallet connection, smart contract interaction, escrow fund locking, order tracking, receipt confirmation, and refund handling.
-Features
-- Direct ETH payments
-- Escrow-based ETH payments
-- Order tracking by ID
-- Buyer receipt confirmation
-- Refund system
-- MetaMask wallet connection
-- React frontend with ethers.js
-- Hardhat local blockchain development
-- Smart contract state management
-- Frontend order visualization
-  
-## Tech Stack
-- Solidity
-- Hardhat
-- JavaScript
-- React
-- Vite
-- ethers.js
-- MetaMask
+A decentralized multi-payment escrow system built with Solidity, Hardhat, React, Ethers.js, and MetaMask.
 
-## Direct Payment:
-Buyer → Contract → Seller
-Status: Completed
+## Supports:
 
-## Escrow Payment:
-Buyer → Contract
-Status: In Escrow
-Confirm Receipt → Seller receives funds
-Refund → Buyer receives funds back
-Order Status Flow
-InEscrow → Completed
-InEscrow → Refunded
-Completed and refunded orders are terminal states.
+Direct ETH payments
+Escrow ETH payments
+Refund system
+Dispute system
+Arbitrator resolution
+Frontend wallet integration
+Full automated smart contract testing
+---
+## Features:
 
-## Project Structure
+# Direct Payment
+Buyer sends ETH directly to seller instantly.
+Buyer → Seller
+Used for trusted fast transactions.
+---
+
+# Escrow Payment
+Funds are locked inside the smart contract until buyer confirms receipt.
+Buyer → Smart Contract → Seller
+Used for safer peer-to-peer transactions.
+---
+# Refund System
+Seller can refund escrowed ETH back to buyer.
+---
+# Dispute System
+Buyer or seller can open a dispute.
+An arbitrator resolves the dispute and releases funds to:
+Seller
+OR
+Buyer
+---
+
+# Tech Stack:
+# Smart Contract
+Solidity
+Hardhat
+Ethers.js
+# Frontend
+React
+Vite
+Ethers.js
+MetaMask
+# Testing
+Mocha
+Chai
+----
+## Project Structure:
 ```
 Multi-Payment-Dapp/
+│
 ├── contracts/
-│   └── MultiPayment.sol
-├── test/
-│   └── smart contract tests
+│   └── multiPayment.sol
+│
 ├── scripts/
 │   └── deploy.js
+│
+├── test/
+│   ├── helpers/
+│   │   └── setup.js
+│   │
+│   ├── multiPayment.CreateDirectPayment.test.js
+│   ├── multiPayment.CreateEscrowPayment.test.js
+│   ├── multiPayment.confirmReceipt.test.js
+│   ├── multiPayment.refund.test.js
+│   ├── multiPayment.stateTransitions.test.js
+│   └── multiPayment.dispute.test.js
+│
 ├── frontend/
-│   └── React + ethers.js frontend
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── contract/
+│   │   │   ├── MultiPaymentABI.json
+│   │   │   └── contractAddress.js
+│   │   │
+│   │   ├── App.jsx
+│   │   ├── App.css
+│   │   ├── main.jsx
+│   │   └── index.css
+│   │
+│   ├── package.json
+│   └── vite.config.js
+│
+├── artifacts/
+├── cache/
 ├── hardhat.config.js
 ├── package.json
+├── package-lock.json
+├── .gitignore
 └── README.md
 ```
-## Run Locally
-1. Install dependencies:
-```bash
-  npm install
+## Smart Contract Architecture:
+
+# Payment Types
 ```
-2. Compile contracts:
-```bash
-   npx hardhat compile
+enum PaymentType {
+    Direct,
+    Escrow
+}
 ```
-3. Run tests:
+
+# Order Status
+```
+enum OrderStatus {
+    Pending,
+    Completed,
+    Refunded,
+    Disputed
+}
+```
+## Core Functions:
+
+# Create Direct Payment
+```
+createDirectPayment(address seller)
+```
+Transfers ETH instantly to seller.
+
+# Create Escrow Payment
+```
+createEscrowPayment(address seller)
+```
+Locks ETH inside smart contract.
+
+# Confirm Receipt
+```
+confirmReceipt(uint256 orderId)
+```
+Buyer releases escrow funds to seller.
+
+# Refund
+```
+refund(uint256 orderId)
+```
+Seller refunds buyer.
+
+# Open Dispute
+```
+openDispute(uint256 orderId)
+```
+Buyer or seller opens dispute.
+
+# Resolve Dispute
+```
+resolveDispute(uint256 orderId, bool releaseToSeller)
+```
+Arbitrator resolves dispute.
+
+## Security Logic
+
+# The contract prevents:
+
+Double confirmations
+Double refunds
+Invalid state transitions
+Unauthorized dispute resolutions
+Unauthorized refunds
+Unauthorized confirmations
+Resolving non-disputed orders
+Using escrow logic on direct payments
+
+## Test Coverage
+# createDirectPayment
+.seller zero address revert
+.zero ETH revert
+.direct transfer success
+.event emission validation
+
+# createEscrowPayment
+.seller zero address revert
+.zero ETH revert
+.escrow storage validation
+.event emission validation
+
+# confirmReceipt
+.order existence checks
+.escrow-only validation
+.buyer-only validation
+.double confirmation prevention
+.ETH release validation
+.event emission validation
+
+# refund
+.order existence checks
+.escrow-only validation
+.seller-only validation
+.double refund prevention
+.ETH refund validation
+.event emission validation
+
+# dispute system
+.openDispute
+.buyer can open dispute
+.seller can open dispute
+.random user blocked
+.direct payment protection
+.completed order protection
+.refunded order protection
+
+# resolveDispute
+.arbitrator-only access
+.seller resolution
+.buyer resolution
+.invalid dispute protection
+.double resolution prevention
+.disputed state protection
+.confirm blocked during dispute
+.refund blocked during dispute
+
+# Frontend Features
+.MetaMask wallet connection
+.Live account detection
+.Role detection
+.Create direct payment
+.Create escrow payment
+.Read order data
+.Confirm receipt
+.Refund escrow
+.Open dispute
+.Resolve dispute to seller
+.Resolve dispute to buyer
+
+## Local Development
+
+# Install dependencies
+```bash
+npm install
+```
+# Frontend:
+```bash
+cd frontend
+npm install
+```
+# Start Hardhat Node
+```bash
+npx hardhat node
+```
+# Deploy Contract
+```bash
+npx hardhat run scripts/deploy.js --network localhost
+```
+# Start Frontend
+```bash
+cd frontend
+npm run dev
+```
+# Run Tests
 ```bash
 npx hardhat test
 ```
-4. Start local blockchain:
-```bash
- npx hardhat node
-```
-5. Deploy contract:
-```bash
- npx hardhat run scripts/deploy.js --network localhost
-```
-6. Update frontend contract address:
-```
- frontend/src/contract/contractAddress.js
- export const contractAddress = "YOUR_DEPLOYED_CONTRACT_ADDRESS";
-```  
-7. Start frontend:
-```bash
-   cd frontend
-   npm install
-   npm run dev
-```
-8. Open:
-```
- http://localhost:5173
-```
-## Frontend Flow
-1. Connect MetaMask
-2. Enter seller address
-3. Enter ETH amount
-4. Choose Direct or Escrow Payment
-5. Read order by ID
-6. Confirm receipt or refund escrow orders
+## Example Workflow
+# Escrow Flow
 
-## Example Escrow Lifecycle
-Buyer creates escrow
+# Buyer
+Creates escrow payment.
 
-↓
+# Seller
+Waits for confirmation.
 
-Funds locked in contract
+# Buyer
+Confirms receipt.
 
-↓
+# Smart Contract
+Releases ETH to seller.
 
-Seller delivers product/service
+# Dispute Flow
+# Buyer or Seller
+Opens dispute.
 
-↓
+# Arbitrator
+Reviews dispute.
 
-Buyer confirms receipt
+# Arbitrator
+Releases funds to buyer or seller.
 
-↓
+## Future Improvements
+.ERC20 support (USDT / USDC)
+.Sepolia deployment
+.Telegram bot integration
+.Backend indexing
+.Event history
+.Transaction analytics
+.Multi-chain support
+.Reputation system
+.AI-assisted dispute analysis
 
-Funds released to seller
-
-## Example Refund Lifecycle
-Buyer creates escrow
-
-↓
-
-Problem occurs
-
-↓
-
-Seller refunds buyer
-
-↓
-
-Funds returned from contract
-
-## Current Limitations
-- ETH only
-- No ERC20/stablecoin support yet
-- No dispute/arbitration system yet
-- No backend/database yet
-- No event indexing yet
-- No multi-user authentication yet
-- Local/test environment only
-
-## Roadmap
-V2 — Dispute System
-- Buyer/seller dispute flow
-- Arbitrator role
-- Dispute resolution states
-- Partial/full refund logic
-
-V3 — ERC20 Support
-- USDT/USDC support
-- Token allowance flow
-- ERC20 escrow lifecycle
-
-V4 — Backend + Event History
-- Order history storage
-- Event listener service
-- User order tracking
-- Analytics dashboard
-
-V5 — Marketplace / Telegram Integration
-- Telegram bot integration
-- Escrow payment links
-- Marketplace use cases
-- Order tracking via bot
-  
-## Use Case
-This project is designed for peer-to-peer transactions where two parties do not fully trust each other.
-
-# Example:
-A buyer wants to purchase a second-hand item from a seller. Instead of sending money directly, the buyer locks funds in escrow. The seller delivers the item. The buyer confirms receipt. The smart contract releases funds to the seller.
-Learning Goals
-- Smart contract architecture
-- Escrow systems
-- Solidity state machines
-- Frontend-blockchain interaction
-- ethers.js
-- MetaMask integration
-- Web3 transaction lifecycle
-- Decentralized payment systems
-  
 ## Author
-Behzad Khoshian
 
-GitHub:
+# Behzad Khoshian
+
+# GitHub:
+
 https://github.com/Bezovskii
