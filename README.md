@@ -313,7 +313,8 @@ npm run dev
 npx hardhat test
 ```
 # Example Workflow
-## Escrow Flow
+
+## Escrow Flow:
 
 ## Buyer
 Creates escrow payment.
@@ -327,7 +328,8 @@ Confirms receipt.
 ## Smart Contract
 Releases ETH to seller.
 
-# Dispute Flow
+# Dispute Flow:
+
 ## Buyer or Seller
 Opens dispute.
 
@@ -360,6 +362,6 @@ Releases funds to buyer or seller.
 
 ## Behzad Khoshian
 
-## GitHub:
+# GitHub:
 
 https://github.com/Bezovskii
