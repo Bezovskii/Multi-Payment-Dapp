@@ -37,19 +37,21 @@ Buyer
 
 
 # Tech Stack:
+
 # Smart Contract
-Solidity
-Hardhat
-Ethers.js
+.Solidity
+.Hardhat
+.Ethers.js
+
 # Frontend
-React
-Vite
-Ethers.js
-MetaMask
+.React
+.Vite
+.Ethers.js
+.MetaMask
 # Testing
-Mocha
-Chai
-----
+.Mocha
+.Chai
+
 ## Project Structure:
 ```
 Multi-Payment-Dapp/
