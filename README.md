@@ -40,14 +40,20 @@ Buyer
 
 # Smart Contract
 .Solidity
+
 .Hardhat
+
 .Ethers.js
 
 # Frontend
 .React
+
 .Vite
+
 .Ethers.js
+
 .MetaMask
+
 # Testing
 .Mocha
 .Chai
