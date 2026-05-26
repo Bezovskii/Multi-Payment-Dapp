@@ -1,4 +1,4 @@
-## Multi-Payment-Dapp
+# Multi-Payment-Dapp
 
 A decentralized multi-payment escrow system built with Solidity, Hardhat, React, Ethers.js, and MetaMask.
 
@@ -14,21 +14,21 @@ Full automated smart contract testing
 
 ## Features:
 
-# Direct Payment
+## Direct Payment
 Buyer sends ETH directly to seller instantly.
 Buyer → Seller
 Used for trusted fast transactions.
 
 
-# Escrow Payment
+## Escrow Payment
 Funds are locked inside the smart contract until buyer confirms receipt.
 Buyer → Smart Contract → Seller
 Used for safer peer-to-peer transactions.
 
-# Refund System
+## Refund System
 Seller can refund escrowed ETH back to buyer.
 
-# Dispute System
+## Dispute System
 Buyer or seller can open a dispute.
 An arbitrator resolves the dispute and releases funds to:
 Seller
@@ -38,7 +38,7 @@ Buyer
 
 # Tech Stack:
 
-# Smart Contract
+## Smart Contract
 
 .Solidity
 
@@ -46,7 +46,7 @@ Buyer
 
 .Ethers.js
 
-# Frontend
+## Frontend
 
 .React
 
@@ -56,7 +56,7 @@ Buyer
 
 .MetaMask
 
-# Testing
+## Testing
 .Mocha
 
 .Chai
@@ -106,9 +106,9 @@ Multi-Payment-Dapp/
 ├── .gitignore
 └── README.md
 ```
-## Smart Contract Architecture:
+# Smart Contract Architecture:
 
-# Payment Types
+## Payment Types
 ```
 enum PaymentType {
     Direct,
@@ -116,7 +116,7 @@ enum PaymentType {
 }
 ```
 
-# Order Status
+## Order Status
 ```
 enum OrderStatus {
     Pending,
@@ -125,47 +125,47 @@ enum OrderStatus {
     Disputed
 }
 ```
-## Core Functions:
+# Core Functions:
 
-# Create Direct Payment
+## Create Direct Payment
 ```
 createDirectPayment(address seller)
 ```
 Transfers ETH instantly to seller.
 
-# Create Escrow Payment
+## Create Escrow Payment
 ```
 createEscrowPayment(address seller)
 ```
 Locks ETH inside smart contract.
 
-# Confirm Receipt
+## Confirm Receipt
 ```
 confirmReceipt(uint256 orderId)
 ```
 Buyer releases escrow funds to seller.
 
-# Refund
+## Refund
 ```
 refund(uint256 orderId)
 ```
 Seller refunds buyer.
 
-# Open Dispute
+## Open Dispute
 ```
 openDispute(uint256 orderId)
 ```
 Buyer or seller opens dispute.
 
-# Resolve Dispute
+## Resolve Dispute
 ```
 resolveDispute(uint256 orderId, bool releaseToSeller)
 ```
 Arbitrator resolves dispute.
 
-## Security Logic
+# Security Logic
 
-# The contract prevents:
+## The contract prevents:
 
 .Double confirmations
 
@@ -183,8 +183,8 @@ Arbitrator resolves dispute.
 
 .Using escrow logic on direct payments
 
-## Test Coverage
-# createDirectPayment
+# Test Coverage
+## createDirectPayment
 .seller zero address revert
 
 .zero ETH revert
@@ -194,7 +194,7 @@ Arbitrator resolves dispute.
 .event emission validation
 
 
-# createEscrowPayment
+## createEscrowPayment
 .seller zero address revert
 
 .zero ETH revert
@@ -203,7 +203,7 @@ Arbitrator resolves dispute.
 
 .event emission validation
 
-# confirmReceipt
+## confirmReceipt
 .order existence checks
 
 .escrow-only validation
@@ -216,7 +216,7 @@ Arbitrator resolves dispute.
 
 .event emission validation
 
-# refund
+## refund
 .order existence checks
 
 .escrow-only validation
@@ -229,7 +229,7 @@ Arbitrator resolves dispute.
 
 .event emission validation
 
-# dispute system
+## dispute system
 .openDispute
 
 .buyer can open dispute
@@ -244,7 +244,7 @@ Arbitrator resolves dispute.
 
 .refunded order protection
 
-# resolveDispute
+## resolveDispute
 .arbitrator-only access
 
 .seller resolution
@@ -261,7 +261,7 @@ Arbitrator resolves dispute.
 
 .refund blocked during dispute
 
-# Frontend Features
+## Frontend Features
 .MetaMask wallet connection
 
 .Live account detection
@@ -284,60 +284,60 @@ Arbitrator resolves dispute.
 
 .Resolve dispute to buyer
 
-## Local Development
+# Local Development
 
-# Install dependencies
+## Install dependencies
 ```bash
 npm install
 ```
-# Frontend:
+## Frontend
 ```bash
 cd frontend
 npm install
 ```
-# Start Hardhat Node
+## Start Hardhat Node
 ```bash
 npx hardhat node
 ```
-# Deploy Contract
+## Deploy Contract
 ```bash
 npx hardhat run scripts/deploy.js --network localhost
 ```
-# Start Frontend
+## Start Frontend
 ```bash
 cd frontend
 npm run dev
 ```
-# Run Tests
+## Run Tests
 ```bash
 npx hardhat test
 ```
-## Example Workflow
-# Escrow Flow
+# Example Workflow
+## Escrow Flow
 
-# Buyer
+## Buyer
 Creates escrow payment.
 
-# Seller
+## Seller
 Waits for confirmation.
 
-# Buyer
+## Buyer
 Confirms receipt.
 
-# Smart Contract
+## Smart Contract
 Releases ETH to seller.
 
 # Dispute Flow
-# Buyer or Seller
+## Buyer or Seller
 Opens dispute.
 
-# Arbitrator
+## Arbitrator
 Reviews dispute.
 
-# Arbitrator
+## Arbitrator
 Releases funds to buyer or seller.
 
-## Future Improvements
+# Future Improvements
 .ERC20 support (USDT / USDC)
 
 .Sepolia deployment
@@ -356,10 +356,10 @@ Releases funds to buyer or seller.
 
 .AI-assisted dispute analysis
 
-## Author
+# Author:
 
-# Behzad Khoshian
+## Behzad Khoshian
 
-# GitHub:
+## GitHub:
 
 https://github.com/Bezovskii
