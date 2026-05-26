@@ -39,6 +39,7 @@ Buyer
 # Tech Stack:
 
 # Smart Contract
+
 .Solidity
 
 .Hardhat
@@ -46,6 +47,7 @@ Buyer
 .Ethers.js
 
 # Frontend
+
 .React
 
 .Vite
@@ -56,6 +58,7 @@ Buyer
 
 # Testing
 .Mocha
+
 .Chai
 
 ## Project Structure:
@@ -164,74 +167,121 @@ Arbitrator resolves dispute.
 
 # The contract prevents:
 
-Double confirmations
-Double refunds
-Invalid state transitions
-Unauthorized dispute resolutions
-Unauthorized refunds
-Unauthorized confirmations
-Resolving non-disputed orders
-Using escrow logic on direct payments
+.Double confirmations
+
+.Double refunds
+
+.Invalid state transitions
+
+.Unauthorized dispute resolutions
+
+.Unauthorized refunds
+
+.Unauthorized confirmations
+
+.Resolving non-disputed orders
+
+.Using escrow logic on direct payments
 
 ## Test Coverage
 # createDirectPayment
 .seller zero address revert
+
 .zero ETH revert
+
 .direct transfer success
+
 .event emission validation
+
 
 # createEscrowPayment
 .seller zero address revert
+
 .zero ETH revert
+
 .escrow storage validation
+
 .event emission validation
 
 # confirmReceipt
 .order existence checks
+
 .escrow-only validation
+
 .buyer-only validation
+
 .double confirmation prevention
+
 .ETH release validation
+
 .event emission validation
 
 # refund
 .order existence checks
+
 .escrow-only validation
+
 .seller-only validation
+
 .double refund prevention
+
 .ETH refund validation
+
 .event emission validation
 
 # dispute system
 .openDispute
+
 .buyer can open dispute
+
 .seller can open dispute
+
 .random user blocked
+
 .direct payment protection
+
 .completed order protection
+
 .refunded order protection
 
 # resolveDispute
 .arbitrator-only access
+
 .seller resolution
+
 .buyer resolution
+
 .invalid dispute protection
+
 .double resolution prevention
+
 .disputed state protection
+
 .confirm blocked during dispute
+
 .refund blocked during dispute
 
 # Frontend Features
 .MetaMask wallet connection
+
 .Live account detection
+
 .Role detection
+
 .Create direct payment
+
 .Create escrow payment
+
 .Read order data
+
 .Confirm receipt
+
 .Refund escrow
+
 .Open dispute
+
 .Resolve dispute to seller
+
 .Resolve dispute to buyer
 
 ## Local Development
@@ -289,13 +339,21 @@ Releases funds to buyer or seller.
 
 ## Future Improvements
 .ERC20 support (USDT / USDC)
+
 .Sepolia deployment
+
 .Telegram bot integration
+
 .Backend indexing
+
 .Event history
+
 .Transaction analytics
+
 .Multi-chain support
+
 .Reputation system
+
 .AI-assisted dispute analysis
 
 ## Author
