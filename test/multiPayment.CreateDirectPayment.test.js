@@ -51,7 +51,7 @@ describe("createDirectPayment", function () {
         expect(order.seller).to.equal(seller.address);
         expect(order.amount).to.equal(ONE_ETH);
         expect(order.paymentType).to.equal(0);
-        expect(order.status).to.equal(1);
+        expect(order.status).to.equal(2);
         expect(order.exists).to.equal(true);
     });
 

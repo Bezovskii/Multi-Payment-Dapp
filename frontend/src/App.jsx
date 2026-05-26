@@ -16,6 +16,8 @@ function App() {
   const [lastOrderId, setLastOrderId] = useState("");
   const [orderData, setOrderData] = useState(null);
 
+  const [arbitrator, setArbitrator] = useState("");
+
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -42,7 +44,10 @@ function App() {
         signer
       );
 
+      const arb = await multiPaymentContract.arbitrator();
+
       setContract(multiPaymentContract);
+      setArbitrator(arb);
       setMessage("Wallet and contract connected.");
     } catch (error) {
       console.error("CONNECT ERROR:", error);
@@ -226,6 +231,81 @@ function App() {
     }
   }
 
+  async function openDispute() {
+    if (!contract) {
+      alert("Connect wallet first");
+      return;
+    }
+
+    if (!orderId || Number(orderId) <= 0) {
+      alert("Enter a valid order ID");
+      return;
+    }
+
+    if (orderData && orderData.status !== 0) {
+      alert("Only orders in escrow can be disputed");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setMessage("Opening dispute...");
+
+      const tx = await contract.openDispute(Number(orderId));
+      await tx.wait();
+
+      setMessage("Dispute opened.");
+      await readOrder();
+    } catch (error) {
+      console.error("OPEN DISPUTE ERROR:", error);
+      alert(error.shortMessage || error.message || "Open dispute failed");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function resolveDispute(releaseToSeller) {
+    if (!contract) {
+      alert("Connect wallet first");
+      return;
+    }
+
+    if (!orderId || Number(orderId) <= 0) {
+      alert("Enter a valid order ID");
+      return;
+    }
+
+    if (orderData && orderData.status !== 1) {
+      alert("Order is not disputed");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setMessage("Resolving dispute...");
+
+      const tx = await contract.resolveDispute(
+        Number(orderId),
+        releaseToSeller
+      );
+
+      await tx.wait();
+
+      setMessage(
+        releaseToSeller
+          ? "Dispute resolved: funds released to seller."
+          : "Dispute resolved: buyer refunded."
+      );
+
+      await readOrder();
+    } catch (error) {
+      console.error("RESOLVE DISPUTE ERROR:", error);
+      alert(error.shortMessage || error.message || "Resolve dispute failed");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   function getPaymentTypeName(paymentType) {
     if (paymentType === 0) return "Direct";
     if (paymentType === 1) return "Escrow";
@@ -234,10 +314,14 @@ function App() {
 
   function getStatusName(status) {
     if (status === 0) return "In Escrow";
-    if (status === 1) return "Completed";
-    if (status === 2) return "Refunded";
+    if (status === 1) return "Disputed";
+    if (status === 2) return "Completed";
+    if (status === 3) return "Refunded";
     return "Unknown";
   }
+
+  const isArbitrator =
+    account && arbitrator && account.toLowerCase() === arbitrator.toLowerCase();
 
   const styles = {
     page: {
@@ -290,6 +374,16 @@ function App() {
       background: "white",
       color: "#111827",
     },
+    dangerButton: {
+      padding: "10px 16px",
+      marginRight: "10px",
+      marginTop: "8px",
+      borderRadius: "8px",
+      border: "1px solid #991b1b",
+      cursor: loading ? "not-allowed" : "pointer",
+      background: "white",
+      color: "#991b1b",
+    },
     message: {
       padding: "12px",
       background: "#eef6ff",
@@ -304,6 +398,13 @@ function App() {
       marginTop: "16px",
       wordBreak: "break-all",
     },
+    badge: {
+      display: "inline-block",
+      padding: "6px 10px",
+      borderRadius: "999px",
+      background: "#e5e7eb",
+      marginTop: "8px",
+    },
   };
 
   return (
@@ -311,7 +412,7 @@ function App() {
       <div style={styles.container}>
         <div style={styles.header}>
           <h1>MultiPayment DApp</h1>
-          <p>Direct and escrow-based ETH payments powered by smart contracts.</p>
+          <p>Direct, escrow, and dispute-based ETH payments.</p>
 
           <button
             onClick={connectWallet}
@@ -326,6 +427,10 @@ function App() {
               <p>Wallet connected ✅</p>
               <p>Account: {account}</p>
               <p>Contract connected: {contract ? "Yes ✅" : "No ❌"}</p>
+              <p>Arbitrator: {arbitrator}</p>
+              <p style={styles.badge}>
+                Role: {isArbitrator ? "Arbitrator" : "User"}
+              </p>
             </div>
           )}
 
@@ -401,6 +506,34 @@ function App() {
           >
             Refund
           </button>
+
+          <button
+            onClick={openDispute}
+            disabled={loading}
+            style={styles.dangerButton}
+          >
+            Open Dispute
+          </button>
+
+          {isArbitrator && (
+            <>
+              <button
+                onClick={() => resolveDispute(true)}
+                disabled={loading}
+                style={styles.secondaryButton}
+              >
+                Resolve to Seller
+              </button>
+
+              <button
+                onClick={() => resolveDispute(false)}
+                disabled={loading}
+                style={styles.secondaryButton}
+              >
+                Resolve to Buyer
+              </button>
+            </>
+          )}
 
           {orderData && (
             <div style={styles.dataBox}>

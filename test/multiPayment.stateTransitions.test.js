@@ -80,8 +80,8 @@ describe("stateTransitions", function () {
         const secondOrder =
             await multiPayment.orderById(SECOND_ORDER_ID);
 
-        expect(firstOrder.status).to.equal(1); // Completed
-        expect(secondOrder.status).to.equal(2); // Refunded
+        expect(firstOrder.status).to.equal(2); // Completed
+        expect(secondOrder.status).to.equal(3); // Refunded
 
         expect(firstOrder.amount).to.equal(ONE_ETH);
         expect(secondOrder.amount).to.equal(TWO_ETH);

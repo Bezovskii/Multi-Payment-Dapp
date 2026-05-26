@@ -9,6 +9,7 @@ contract MultiPayment {
 
     enum OrderStatus {
         InEscrow,
+        Disputed,
         Completed,
         Refunded
     }
@@ -24,6 +25,7 @@ contract MultiPayment {
     }
 
     uint256 public nextOrderId = 1;
+    address public arbitrator;
 
     mapping(uint256 => Order) public orderById;
 
@@ -54,6 +56,28 @@ contract MultiPayment {
         address indexed seller,
         uint256 amount
     );
+
+    event DisputeOpened(
+        uint256 indexed id,
+        address indexed openedBy
+    );
+
+    event DisputeResolved(
+        uint256 indexed id,
+        address indexed resolver,
+        bool releasedToSeller,
+        uint256 amount
+    );
+
+    modifier onlyArbitrator() {
+        require(msg.sender == arbitrator, "not arbitrator");
+        _;
+    }
+
+    constructor(address _arbitrator) {
+        require(_arbitrator != address(0), "invalid arbitrator");
+        arbitrator = _arbitrator;
+    }
 
     function createDirectPayment(address seller) external payable {
         require(seller != address(0), "invalid seller");
@@ -140,6 +164,58 @@ contract MultiPayment {
             orderId,
             currentOrder.buyer,
             currentOrder.seller,
+            currentOrder.amount
+        );
+    }
+
+    function openDispute(uint256 orderId) external {
+        Order storage currentOrder = orderById[orderId];
+
+        require(currentOrder.exists, "order does not exist");
+        require(currentOrder.paymentType == PaymentType.Escrow, "only escrow");
+        require(currentOrder.status == OrderStatus.InEscrow, "not in escrow");
+
+        require(
+            msg.sender == currentOrder.buyer ||
+                msg.sender == currentOrder.seller,
+            "only participant"
+        );
+
+        currentOrder.status = OrderStatus.Disputed;
+
+        emit DisputeOpened(orderId, msg.sender);
+    }
+
+    function resolveDispute(
+        uint256 orderId,
+        bool releaseToSeller
+    ) external onlyArbitrator {
+        Order storage currentOrder = orderById[orderId];
+
+        require(currentOrder.exists, "order does not exist");
+        require(currentOrder.paymentType == PaymentType.Escrow, "only escrow");
+        require(currentOrder.status == OrderStatus.Disputed, "not disputed");
+
+        if (releaseToSeller) {
+            currentOrder.status = OrderStatus.Completed;
+
+            (bool success, ) = payable(currentOrder.seller).call{
+                value: currentOrder.amount
+            }("");
+            require(success, "transfer failed");
+        } else {
+            currentOrder.status = OrderStatus.Refunded;
+
+            (bool success, ) = payable(currentOrder.buyer).call{
+                value: currentOrder.amount
+            }("");
+            require(success, "refund failed");
+        }
+
+        emit DisputeResolved(
+            orderId,
+            msg.sender,
+            releaseToSeller,
             currentOrder.amount
         );
     }

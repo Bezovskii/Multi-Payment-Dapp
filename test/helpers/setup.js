@@ -1,16 +1,19 @@
 const { ethers } = require("hardhat");
 
 async function deployMultiPaymentFixture() {
-    const [owner, buyer, seller, other] = await ethers.getSigners();
+    const [owner, arbitrator, buyer, seller, other] =
+        await ethers.getSigners();
 
     const MultiPayment = await ethers.getContractFactory("MultiPayment");
 
-    const multiPayment = await MultiPayment.deploy();
+    const multiPayment = await MultiPayment.deploy(arbitrator.address);
+
     await multiPayment.waitForDeployment();
 
     return {
         multiPayment,
         owner,
+        arbitrator,
         buyer,
         seller,
         other,

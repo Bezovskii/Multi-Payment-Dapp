@@ -83,7 +83,7 @@ describe("refund", function () {
             await multiPayment.orderById(FIRST_ORDER_ID);
 
         expect(refundedOrder.exists).to.equal(true);
-        expect(refundedOrder.status).to.equal(2); // Refunded
+        expect(refundedOrder.status).to.equal(3); // Refunded
         expect(refundedOrder.paymentType).to.equal(1); // Escrow
         expect(refundedOrder.buyer).to.equal(buyer.address);
         expect(refundedOrder.seller).to.equal(seller.address);

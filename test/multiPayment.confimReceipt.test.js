@@ -83,7 +83,7 @@ describe("confirmReceipt", function () {
             await multiPayment.orderById(FIRST_ORDER_ID);
 
         expect(completedOrder.exists).to.equal(true);
-        expect(completedOrder.status).to.equal(1); // Completed
+        expect(completedOrder.status).to.equal(2); // Completed
         expect(completedOrder.paymentType).to.equal(1); // Escrow
         expect(completedOrder.buyer).to.equal(buyer.address);
         expect(completedOrder.seller).to.equal(seller.address);
