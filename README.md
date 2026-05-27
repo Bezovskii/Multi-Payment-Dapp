@@ -12,6 +12,9 @@ Arbitrator resolution
 Frontend wallet integration
 Full automated smart contract testing
 
+## Demo
+https://www.linkedin.com/feed/update/urn:li:ugcPost:7465519460720971778/
+
 ## Features:
 
 ## Direct Payment
