@@ -145,21 +145,37 @@ npx hardhat test
 
 Multi-Payment-Dapp
 │
+
 ├── contracts/
+
 ├── frontend/
+
 ├── test/
+
 │
+
 ├── assets/
+
 │   ├── screenshots/
+
 │   └── diagrams/
+
 │
+
 ├── docs/
+
 │   ├── ARCHITECTURE.md
+
 │   ├── STATE_MACHINE.md
+
 │   ├── SECURITY.md
+
 │   ├── TESTING.md
+
 │   └── ROADMAP.md
+
 │
+
 └── README.md
 
 ---
