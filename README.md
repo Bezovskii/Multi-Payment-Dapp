@@ -5,11 +5,6 @@ A decentralized escrow and arbitration protocol built with Solidity, Hardhat, Re
 ESCT enables secure ETH and ERC20 transactions through direct payments, escrow protection, dispute handling, and arbitrator-based settlement.
 
 ---
-## Dashboard
-
-![Dashboard](assets/screenshots/dashboard.png)
-
----
 
 ## Overview
 
@@ -70,6 +65,8 @@ The protocol is built around a single escrow engine responsible for:
 - State Management
 - Dispute Handling
 - Arbitration Settlement
+  
+  ![Architecture](assets/diagrams/architechture.jpeg)
 
 Detailed architecture documentation:
 
@@ -81,6 +78,8 @@ Detailed architecture documentation:
 
 Escrow orders follow a controlled state machine that prevents invalid transitions and ensures predictable settlement behavior.
 
+![State Machine](assets/diagrams/state-machine.jpeg)
+
 Detailed state machine documentation:
 
 - "State Machine Documentation" (docs/STATE_MACHINE.md)
@@ -89,14 +88,27 @@ Detailed state machine documentation:
 
 ## Screenshots
 
-Dashboard
+## Dashboard
 
-ERC20 Escrow
+![Dashboard](assets/screenshots/dashboard.png)
 
-Dispute Opened
+---
 
-Arbitration Resolution
+## ERC20 Escrow
 
+![ERC20 Escrow](assets/screenshots/erc20-payment.png)
+
+---
+
+## Dispute Opened
+
+![Dispute Opened](assets/screenshots/dispute-open.png)
+
+---
+
+## Arbitration Resolution
+
+![Arbitration Resolution](assets/screenshots/arbitration-resolution.png)
 ---
 
 ## Security
@@ -119,10 +131,10 @@ Full documentation:
 ## Testing
 
 Current Test Status:
-
+```text
 49 Passing Tests
 0 Failing Tests
-
+```
 Coverage includes:
 
 - ETH Direct Payments
