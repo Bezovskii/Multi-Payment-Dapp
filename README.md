@@ -5,6 +5,11 @@ A decentralized escrow and arbitration protocol built with Solidity, Hardhat, Re
 ESCT enables secure ETH and ERC20 transactions through direct payments, escrow protection, dispute handling, and arbitrator-based settlement.
 
 ---
+## Dashboard
+
+![Dashboard](assets/screenshots/dashboard.png)
+
+---
 
 ## Overview
 
