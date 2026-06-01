@@ -102,6 +102,7 @@ describe("confirmReceipt", function () {
                 FIRST_ORDER_ID,
                 seller.address,
                 buyer.address,
+                ethers.ZeroAddress,
                 ONE_ETH
             );
     });

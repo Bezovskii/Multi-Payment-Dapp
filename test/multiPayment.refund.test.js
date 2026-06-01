@@ -102,6 +102,7 @@ describe("refund", function () {
                 FIRST_ORDER_ID,
                 buyer.address,
                 seller.address,
+                ethers.ZeroAddress,
                 ONE_ETH
             );
     });

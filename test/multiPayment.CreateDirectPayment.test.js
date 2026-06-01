@@ -66,6 +66,6 @@ describe("createDirectPayment", function () {
             )
         )
             .to.emit(multiPayment, "DirectPaymentCreated")
-            .withArgs(FIRST_ORDER_ID, buyer.address, seller.address, ONE_ETH);
+            .withArgs(FIRST_ORDER_ID, buyer.address, seller.address,ethers.ZeroAddress,ONE_ETH);
     });
 });

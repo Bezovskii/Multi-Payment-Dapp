@@ -157,7 +157,7 @@ describe("MultiPayment Dispute System", function () {
                     .resolveDispute(FIRST_ORDER_ID, true)
             )
                 .to.emit(multiPayment, "DisputeResolved")
-                .withArgs(FIRST_ORDER_ID, arbitrator.address, true, ONE_ETH);
+                .withArgs(FIRST_ORDER_ID, arbitrator.address, true,ethers.ZeroAddress, ONE_ETH);
 
             const order = await multiPayment.orderById(FIRST_ORDER_ID);
 
@@ -176,7 +176,7 @@ describe("MultiPayment Dispute System", function () {
                     .resolveDispute(FIRST_ORDER_ID, false)
             )
                 .to.emit(multiPayment, "DisputeResolved")
-                .withArgs(FIRST_ORDER_ID, arbitrator.address, false, ONE_ETH);
+                .withArgs(FIRST_ORDER_ID, arbitrator.address, false,ethers.ZeroAddress, ONE_ETH);
 
             const order = await multiPayment.orderById(FIRST_ORDER_ID);
 

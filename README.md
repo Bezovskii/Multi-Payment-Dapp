@@ -1,370 +1,248 @@
-# Multi-Payment-Dapp
+ESCT Protocol — Multi-Payment Escrow Engine
 
-A decentralized multi-payment escrow system built with Solidity, Hardhat, React, Ethers.js, and MetaMask.
+A decentralized escrow and arbitration protocol built with Solidity, Hardhat, React, Ethers.js, and MetaMask.
 
-## Supports:
+ESCT enables secure ETH and ERC20 transactions through direct payments, escrow protection, dispute handling, and arbitrator-based settlement.
 
-Direct ETH payments
-Escrow ETH payments
-Refund system
-Dispute system
-Arbitrator resolution
-Frontend wallet integration
-Full automated smart contract testing
+---
 
-## Demo
-https://www.linkedin.com/feed/update/urn:li:ugcPost:7465519460720971778/
+Dashboard
 
-## Features:
+---
 
-## Direct Payment
-Buyer sends ETH directly to seller instantly.
-Buyer → Seller
-Used for trusted fast transactions.
+Overview
 
+Traditional digital payments require users to trust counterparties before receiving goods or services.
 
-## Escrow Payment
-Funds are locked inside the smart contract until buyer confirms receipt.
-Buyer → Smart Contract → Seller
-Used for safer peer-to-peer transactions.
+ESCT introduces an escrow-based payment model where funds remain protected until delivery is confirmed or a dispute is resolved.
 
-## Refund System
-Seller can refund escrowed ETH back to buyer.
+The protocol supports:
 
-## Dispute System
-Buyer or seller can open a dispute.
-An arbitrator resolves the dispute and releases funds to:
-Seller
-OR
-Buyer
+- Direct Payments
+- Escrow Payments
+- ERC20 Payments
+- Refund Handling
+- Dispute Resolution
+- Arbitration-Based Settlement
 
+---
 
-# Tech Stack:
+Key Features
 
-## Smart Contract
+ETH Payments
 
-.Solidity
+- ETH Direct Payments
+- ETH Escrow Payments
+- Buyer Confirmation Flow
+- Seller Refund Flow
 
-.Hardhat
+ERC20 Payments
 
-.Ethers.js
+- ERC20 Direct Payments
+- ERC20 Escrow Payments
+- ERC20 Approval Flow
+- Token Settlement
 
-## Frontend
+Dispute Resolution
 
-.React
+- Buyer Opens Dispute
+- Seller Opens Dispute
+- Arbitrator Resolves Dispute
+- Resolution To Buyer
+- Resolution To Seller
 
-.Vite
+Frontend
 
-.Ethers.js
+- React Dashboard
+- MetaMask Integration
+- Order Management
+- Real-Time Order Tracking
 
-.MetaMask
+---
 
-## Testing
-.Mocha
+Architecture
 
-.Chai
+The protocol is built around a single escrow engine responsible for:
 
-## Project Structure:
-```
-Multi-Payment-Dapp/
+- Payment Creation
+- Escrow Custody
+- State Management
+- Dispute Handling
+- Arbitration Settlement
+
+Detailed architecture documentation:
+
+- "Architecture Documentation" (docs/ARCHITECTURE.md)
+
+---
+
+State Machine
+
+Escrow orders follow a controlled state machine that prevents invalid transitions and ensures predictable settlement behavior.
+
+Detailed state machine documentation:
+
+- "State Machine Documentation" (docs/STATE_MACHINE.md)
+
+---
+
+Screenshots
+
+ERC20 Escrow
+
+Dispute Opened
+
+Arbitration Resolution
+
+---
+
+Security
+
+Security considerations include:
+
+- Role-Based Access Control
+- State Transition Validation
+- Escrow Protection
+- Input Validation
+- ERC20 Allowance Verification
+- Dispute Resolution Controls
+
+Full documentation:
+
+- "Security Documentation" (docs/SECURITY.md)
+
+---
+
+Testing
+
+Current Test Status:
+
+49 Passing Tests
+0 Failing Tests
+
+Coverage includes:
+
+- ETH Direct Payments
+- ETH Escrow Payments
+- ERC20 Direct Payments
+- ERC20 Escrow Payments
+- Refund Logic
+- Dispute Logic
+- Arbitration Logic
+- Access Control
+- State Transition Validation
+
+Detailed documentation:
+
+- "Testing Documentation" (docs/TESTING.md)
+
+Run tests:
+
+npx hardhat test
+
+---
+
+Project Structure
+
+Multi-Payment-Dapp
 │
 ├── contracts/
-│   └── multiPayment.sol
-│
-├── scripts/
-│   └── deploy.js
-│
-├── test/
-│   ├── helpers/
-│   │   └── setup.js
-│   │
-│   ├── multiPayment.CreateDirectPayment.test.js
-│   ├── multiPayment.CreateEscrowPayment.test.js
-│   ├── multiPayment.confirmReceipt.test.js
-│   ├── multiPayment.refund.test.js
-│   ├── multiPayment.stateTransitions.test.js
-│   └── multiPayment.dispute.test.js
-│
 ├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── assets/
-│   │   ├── contract/
-│   │   │   ├── MultiPaymentABI.json
-│   │   │   └── contractAddress.js
-│   │   │
-│   │   ├── App.jsx
-│   │   ├── App.css
-│   │   ├── main.jsx
-│   │   └── index.css
-│   │
-│   ├── package.json
-│   └── vite.config.js
+├── test/
 │
-├── artifacts/
-├── cache/
-├── hardhat.config.js
-├── package.json
-├── package-lock.json
-├── .gitignore
+├── assets/
+│   ├── screenshots/
+│   └── diagrams/
+│
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── STATE_MACHINE.md
+│   ├── SECURITY.md
+│   ├── TESTING.md
+│   └── ROADMAP.md
+│
 └── README.md
-```
-# Smart Contract Architecture:
 
-## Payment Types
-```
-enum PaymentType {
-    Direct,
-    Escrow
-}
-```
+---
 
-## Order Status
-```
-enum OrderStatus {
-    Pending,
-    Completed,
-    Refunded,
-    Disputed
-}
-```
-# Core Functions:
+Quick Start
 
-## Create Direct Payment
-```
-createDirectPayment(address seller)
-```
-Transfers ETH instantly to seller.
+Install dependencies:
 
-## Create Escrow Payment
-```
-createEscrowPayment(address seller)
-```
-Locks ETH inside smart contract.
-
-## Confirm Receipt
-```
-confirmReceipt(uint256 orderId)
-```
-Buyer releases escrow funds to seller.
-
-## Refund
-```
-refund(uint256 orderId)
-```
-Seller refunds buyer.
-
-## Open Dispute
-```
-openDispute(uint256 orderId)
-```
-Buyer or seller opens dispute.
-
-## Resolve Dispute
-```
-resolveDispute(uint256 orderId, bool releaseToSeller)
-```
-Arbitrator resolves dispute.
-
-# Security Logic
-
-## The contract prevents:
-
-.Double confirmations
-
-.Double refunds
-
-.Invalid state transitions
-
-.Unauthorized dispute resolutions
-
-.Unauthorized refunds
-
-.Unauthorized confirmations
-
-.Resolving non-disputed orders
-
-.Using escrow logic on direct payments
-
-# Test Coverage
-## createDirectPayment
-.seller zero address revert
-
-.zero ETH revert
-
-.direct transfer success
-
-.event emission validation
-
-
-## createEscrowPayment
-.seller zero address revert
-
-.zero ETH revert
-
-.escrow storage validation
-
-.event emission validation
-
-## confirmReceipt
-.order existence checks
-
-.escrow-only validation
-
-.buyer-only validation
-
-.double confirmation prevention
-
-.ETH release validation
-
-.event emission validation
-
-## refund
-.order existence checks
-
-.escrow-only validation
-
-.seller-only validation
-
-.double refund prevention
-
-.ETH refund validation
-
-.event emission validation
-
-## dispute system
-.openDispute
-
-.buyer can open dispute
-
-.seller can open dispute
-
-.random user blocked
-
-.direct payment protection
-
-.completed order protection
-
-.refunded order protection
-
-## resolveDispute
-.arbitrator-only access
-
-.seller resolution
-
-.buyer resolution
-
-.invalid dispute protection
-
-.double resolution prevention
-
-.disputed state protection
-
-.confirm blocked during dispute
-
-.refund blocked during dispute
-
-## Frontend Features
-.MetaMask wallet connection
-
-.Live account detection
-
-.Role detection
-
-.Create direct payment
-
-.Create escrow payment
-
-.Read order data
-
-.Confirm receipt
-
-.Refund escrow
-
-.Open dispute
-
-.Resolve dispute to seller
-
-.Resolve dispute to buyer
-
-# Local Development
-
-## Install dependencies
-```bash
 npm install
-```
-## Frontend
-```bash
-cd frontend
-npm install
-```
-## Start Hardhat Node
-```bash
+
+Run local node:
+
 npx hardhat node
-```
-## Deploy Contract
-```bash
+
+Deploy contract:
+
 npx hardhat run scripts/deploy.js --network localhost
-```
-## Start Frontend
-```bash
+
+Run frontend:
+
 cd frontend
+npm install
 npm run dev
-```
-## Run Tests
-```bash
+
+Run tests:
+
 npx hardhat test
-```
-# Example Workflow
 
-## Escrow Flow:
+---
 
-## Buyer
-Creates escrow payment.
+Roadmap
 
-## Seller
-Waits for confirmation.
+Current Version:
 
-## Buyer
-Confirms receipt.
+- ETH Direct Payments
+- ETH Escrow Payments
+- ERC20 Direct Payments
+- ERC20 Escrow Payments
+- Dispute Resolution
+- Arbitration System
+- React Frontend
 
-## Smart Contract
-Releases ETH to seller.
+Planned Upgrades:
 
-# Dispute Flow:
+- Telegram Integration
+- Milestone-Based Escrow
+- Foundry Fuzz Testing
+- Foundry Invariant Testing
+- Security Review
+- Gas Optimization
 
-## Buyer or Seller
-Opens dispute.
+Detailed roadmap:
 
-## Arbitrator
-Reviews dispute.
+- "Roadmap" (docs/ROADMAP.md)
 
-## Arbitrator
-Releases funds to buyer or seller.
+---
 
-# Future Improvements
-.ERC20 support (USDT / USDC)
+Demo
 
-.Sepolia deployment
+Demo video:
 
-.Telegram bot integration
+Add your video link here after upload.
 
-.Backend indexing
+Example:
 
-.Event history
+https://youtu.be/your-demo-link
 
-.Transaction analytics
+---
 
-.Multi-chain support
+Tech Stack
 
-.Reputation system
+- Solidity
+- Hardhat
+- Ethers.js
+- React
+- Vite
+- MetaMask
+- Mocha
+- Chai
 
-.AI-assisted dispute analysis
+---
 
-# Author:
+License
 
-## Behzad Khoshian
-
-# GitHub:
-
-https://github.com/Bezovskii
+MIT License
