@@ -1,4 +1,4 @@
-ESCT Protocol — Multi-Payment Escrow Engine
+# ESCT Protocol — Multi-Payment Escrow Engine
 
 A decentralized escrow and arbitration protocol built with Solidity, Hardhat, React, Ethers.js, and MetaMask.
 
@@ -6,11 +6,7 @@ ESCT enables secure ETH and ERC20 transactions through direct payments, escrow p
 
 ---
 
-Dashboard
-
----
-
-Overview
+## Overview
 
 Traditional digital payments require users to trust counterparties before receiving goods or services.
 
@@ -27,23 +23,23 @@ The protocol supports:
 
 ---
 
-Key Features
+## Key Features
 
-ETH Payments
+## ETH Payments:
 
 - ETH Direct Payments
 - ETH Escrow Payments
 - Buyer Confirmation Flow
 - Seller Refund Flow
 
-ERC20 Payments
+## ERC20 Payments:
 
 - ERC20 Direct Payments
 - ERC20 Escrow Payments
 - ERC20 Approval Flow
 - Token Settlement
 
-Dispute Resolution
+## Dispute Resolution:
 
 - Buyer Opens Dispute
 - Seller Opens Dispute
@@ -51,7 +47,7 @@ Dispute Resolution
 - Resolution To Buyer
 - Resolution To Seller
 
-Frontend
+## Frontend:
 
 - React Dashboard
 - MetaMask Integration
@@ -60,7 +56,7 @@ Frontend
 
 ---
 
-Architecture
+## Architecture
 
 The protocol is built around a single escrow engine responsible for:
 
@@ -76,7 +72,7 @@ Detailed architecture documentation:
 
 ---
 
-State Machine
+## State Machine
 
 Escrow orders follow a controlled state machine that prevents invalid transitions and ensures predictable settlement behavior.
 
@@ -86,7 +82,9 @@ Detailed state machine documentation:
 
 ---
 
-Screenshots
+## Screenshots
+
+Dashboard
 
 ERC20 Escrow
 
@@ -96,7 +94,7 @@ Arbitration Resolution
 
 ---
 
-Security
+## Security
 
 Security considerations include:
 
@@ -113,7 +111,7 @@ Full documentation:
 
 ---
 
-Testing
+## Testing
 
 Current Test Status:
 
@@ -137,12 +135,13 @@ Detailed documentation:
 - "Testing Documentation" (docs/TESTING.md)
 
 Run tests:
-
+```bash
 npx hardhat test
-
+```
 ---
 
-Project Structure
+## Project Structure
+
 
 Multi-Payment-Dapp
 │
@@ -165,35 +164,41 @@ Multi-Payment-Dapp
 
 ---
 
-Quick Start
+## Quick Start
 
-Install dependencies:
+## Install dependencies:
 
+```bash
 npm install
+```
+## Run local node:
 
-Run local node:
-
+```bash
 npx hardhat node
+```
 
-Deploy contract:
+## Deploy contract:
 
+```bash
 npx hardhat run scripts/deploy.js --network localhost
+```
 
-Run frontend:
-
+## Run frontend:
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
-Run tests:
-
+## Run tests:
+```bash
 npx hardhat test
-
+```
 ---
 
-Roadmap
+## Roadmap
 
-Current Version:
+## Current Version:
 
 - ETH Direct Payments
 - ETH Escrow Payments
@@ -203,7 +208,7 @@ Current Version:
 - Arbitration System
 - React Frontend
 
-Planned Upgrades:
+## Planned Upgrades:
 
 - Telegram Integration
 - Milestone-Based Escrow
@@ -212,25 +217,21 @@ Planned Upgrades:
 - Security Review
 - Gas Optimization
 
-Detailed roadmap:
+## Detailed roadmap:
 
 - "Roadmap" (docs/ROADMAP.md)
 
 ---
 
-Demo
+## Demo
 
 Demo video:
 
-Add your video link here after upload.
 
-Example:
-
-https://youtu.be/your-demo-link
 
 ---
 
-Tech Stack
+## Tech Stack
 
 - Solidity
 - Hardhat
@@ -243,6 +244,6 @@ Tech Stack
 
 ---
 
-License
+## License
 
 MIT License
