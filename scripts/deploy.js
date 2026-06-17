@@ -1,14 +1,16 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-    const [buyer, arbitrator, seller] = await ethers.getSigners();
+    const [deployer] = await ethers.getSigners();
 
-    console.log("Deploying with account:", buyer.address);
-    console.log("Arbitrator address:", arbitrator.address);
-    console.log("Seller address:", seller.address);
+
+    const arbitratorAddress = deployer.address;
+
+    console.log("Deploying with account:", deployer.address);
+    console.log("Arbitrator address:", arbitratorAddress);
 
     const MultiPayment = await ethers.getContractFactory("MultiPayment");
-    const multiPayment = await MultiPayment.deploy(arbitrator.address);
+    const multiPayment = await MultiPayment.deploy(arbitratorAddress);
     await multiPayment.waitForDeployment();
 
     console.log("MultiPayment deployed to:", await multiPayment.getAddress());
@@ -17,11 +19,11 @@ async function main() {
     const token = await MockERC20.deploy();
     await token.waitForDeployment();
 
-    console.log("MockERC20:", await token.getAddress());
+    console.log("MockERC20 deployed to:", await token.getAddress());
 
-    await token.mint(buyer.address, 2000n * 1_000_000n);
+    await token.mint(deployer.address, 2000n * 1_000_000n);
 
-    console.log("Minted token to buyer:", buyer.address);
+    console.log("Minted token to:", deployer.address);
 }
 
 main().catch((error) => {
